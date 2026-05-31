@@ -1,0 +1,432 @@
+:root {
+  color-scheme: dark;
+  --bg: #120915;
+  --panel: rgba(34, 18, 45, 0.86);
+  --panel-strong: #251031;
+  --cream: #fff4da;
+  --pink: #ff4fa3;
+  --orange: #ffad42;
+  --violet: #8d62ff;
+  --green: #62ffc6;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 79, 163, 0.28), transparent 30rem),
+    radial-gradient(circle at bottom right, rgba(98, 255, 198, 0.2), transparent 24rem),
+    linear-gradient(145deg, #170a1d 0%, #120915 48%, #050309 100%);
+  color: var(--cream);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.hero {
+  max-width: 790px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: Anton, Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(3.4rem, 9vw, 8.7rem);
+  line-height: 0.9;
+  text-shadow: 0 5px 0 var(--pink), 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.intro {
+  max-width: 640px;
+  margin: 24px 0 0;
+  color: rgba(255, 244, 218, 0.82);
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.booth {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.camera-card,
+.strip-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.camera-card {
+  padding: 18px;
+}
+
+.strip-card {
+  padding: 22px;
+}
+
+.marquee {
+  display: flex;
+  gap: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  color: var(--orange);
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(1.3rem, 4vw, 3.3rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.marquee span:nth-child(even) {
+  color: var(--pink);
+}
+
+.camera-frame {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  border: 10px solid #fff4da;
+  border-radius: 24px;
+  background: #100714;
+}
+
+video,
+#uploaded-preview,
+.camera-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+video,
+#uploaded-preview {
+  display: block;
+  object-fit: cover;
+}
+
+video {
+  transform: scaleX(-1);
+}
+
+#uploaded-preview {
+  display: none;
+}
+
+#uploaded-preview.is-visible {
+  display: block;
+}
+
+.is-hidden-source {
+  display: none;
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 24px;
+  color: rgba(255, 244, 218, 0.75);
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255, 79, 163, 0.15), rgba(141, 98, 255, 0.16)),
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255, 255, 255, 0.04) 14px 28px);
+}
+
+.camera-placeholder.is-hidden {
+  display: none;
+}
+
+.camera-placeholder strong {
+  color: var(--cream);
+  font-family: Anton, Impact, sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(18, 9, 21, 0.42);
+  color: var(--cream);
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(7rem, 20vw, 16rem);
+  text-shadow: 0 8px 0 var(--pink);
+}
+
+.countdown.is-visible {
+  display: grid;
+}
+
+.controls,
+.strip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.button {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 18px;
+  color: #120915;
+  cursor: pointer;
+  font: 800 0.92rem/1 Inter, sans-serif;
+  letter-spacing: 0.02em;
+  transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  box-shadow: 0 14px 32px rgba(255, 79, 163, 0.28);
+}
+
+.secondary {
+  background: linear-gradient(135deg, var(--green), #d8fff1);
+}
+
+.ghost {
+  border: 1px solid rgba(255, 244, 218, 0.35);
+  color: var(--cream);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#upload-photo {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px solid rgba(255, 244, 218, 0.16);
+  border-radius: 20px;
+}
+
+.filters legend {
+  padding: 0 8px;
+  color: rgba(255, 244, 218, 0.72);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.filters label {
+  cursor: pointer;
+}
+
+.filters input {
+  accent-color: var(--pink);
+}
+
+.stickers,
+.doodles {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.7fr) 1fr;
+  gap: 18px;
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid rgba(98, 255, 198, 0.18);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(98, 255, 198, 0.08), rgba(255, 79, 163, 0.08)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.sticker-copy h2 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.sticker-copy > p:not(.eyebrow) {
+  margin: 10px 0 0;
+  color: rgba(255, 244, 218, 0.68);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.sticker-options,
+.doodle-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: start;
+}
+
+.sticker-option,
+.doodle-option {
+  border: 2px dashed rgba(18, 9, 21, 0.52);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #120915;
+  cursor: pointer;
+  background: #fff4da;
+  box-shadow: 0 8px 0 rgba(255, 79, 163, 0.28);
+  font: 800 0.84rem/1.2 Inter, sans-serif;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.sticker-option:hover,
+.sticker-option[aria-pressed="true"],
+.doodle-option:hover,
+.doodle-option[aria-pressed="true"] {
+  transform: rotate(-1deg) translateY(-2px);
+}
+
+.sticker-option[aria-pressed="true"],
+.doodle-option[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--green), #fff4da 56%, var(--orange));
+  box-shadow: 0 8px 0 rgba(98, 255, 198, 0.32);
+}
+
+.palette-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.swatch {
+  border: 1px solid rgba(255, 244, 218, 0.22);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #120915;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.wasabi {
+  background: #e9f056;
+}
+
+.orange-topaze {
+  background: #ff5c34;
+}
+
+.cool-blue {
+  background: #d7efff;
+}
+
+.cassis {
+  color: #fff4da;
+  background: #351e28;
+}
+
+.vert-sauge {
+  background: #aeb8a0;
+}
+
+#strip-canvas {
+  width: 100%;
+  height: auto;
+  margin-top: 18px;
+  border-radius: 18px;
+  background: #fff4da;
+  box-shadow: inset 0 0 0 1px rgba(18, 9, 21, 0.18);
+}
+
+.hint {
+  margin: 14px 0 0;
+  color: rgba(255, 244, 218, 0.68);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .booth {
+    grid-template-columns: 1fr;
+  }
+
+  .strip-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    padding: 28px 0;
+  }
+
+  .camera-frame,
+  video,
+  #uploaded-preview,
+  .camera-placeholder {
+    min-height: 360px;
+  }
+
+  .stickers,
+  .doodles {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-card,
+  .strip-card {
+    border-radius: 24px;
+  }
+}

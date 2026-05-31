@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runarounds Fan Photobooth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Fan cam ready</p>
+        <h1 id="page-title">The Runarounds Photobooth</h1>
+        <p class="intro">
+          Step into the green room, snap a four-frame souvenir strip, and download a tour-night keepsake.
+        </p>
+      </section>
+
+      <section class="booth" aria-label="Photobooth controls and preview">
+        <div class="camera-card">
+          <div class="marquee" aria-hidden="true">
+            <span>runarounds</span><span>fangirl booth</span><span>encore</span>
+          </div>
+          <div class="camera-frame">
+            <video id="camera" autoplay playsinline muted></video>
+            <canvas id="snapshot-canvas" hidden></canvas>
+            <img id="uploaded-preview" alt="Uploaded photobooth preview" />
+            <div class="camera-placeholder" id="placeholder">
+              <strong>Camera preview</strong>
+              <span>Allow camera access or upload a photo to start.</span>
+            </div>
+            <div class="countdown" id="countdown" aria-live="polite"></div>
+          </div>
+
+          <div class="controls">
+            <button class="button primary" id="start-camera" type="button">Start camera</button>
+            <button class="button secondary" id="take-strip" type="button" disabled>Take 4-photo strip</button>
+            <label class="button ghost upload-button" for="upload-photo">Upload photo</label>
+            <input id="upload-photo" type="file" accept="image/*" />
+          </div>
+
+          <fieldset class="filters">
+            <legend>Pick a stage-light filter</legend>
+            <label><input type="radio" name="filter" value="none" checked /> Clean</label>
+            <label><input type="radio" name="filter" value="warm" /> Gold haze</label>
+            <label><input type="radio" name="filter" value="pink" /> Fan flash</label>
+            <label><input type="radio" name="filter" value="mono" /> Backstage B&amp;W</label>
+            <label><input type="radio" name="filter" value="downtown" /> Downtown</label>
+            <label><input type="radio" name="filter" value="runarounds" /> The Runarounds stars</label>
+          </fieldset>
+
+          <section class="stickers" aria-labelledby="stickers-title">
+            <div class="sticker-copy">
+              <p class="eyebrow">Encore stickers</p>
+              <h2 id="stickers-title">Tap your favorites</h2>
+              <p>Selected stickers are stamped at the end of the finished photo strip.</p>
+            </div>
+            <div class="sticker-options" aria-label="Sticker options">
+              <button class="sticker-option" type="button" data-sticker="Little Rock, AR" aria-pressed="false">
+                Little Rock, AR
+              </button>
+              <button class="sticker-option" type="button" data-sticker="The Hall" aria-pressed="false">
+                The Hall
+              </button>
+              <button class="sticker-option" type="button" data-sticker="funny how the universe works" aria-pressed="false">
+                funny how the universe works
+              </button>
+              <button class="sticker-option" type="button" data-sticker="the perfect does not exist" aria-pressed="false">
+                the perfect does not exist
+              </button>
+              <button class="sticker-option" type="button" data-sticker="but there she goes" aria-pressed="false">
+                but there she goes
+              </button>
+            </div>
+          </section>
+
+          <section class="doodles" aria-labelledby="doodles-title">
+            <div class="sticker-copy">
+              <p class="eyebrow">Palette doodles</p>
+              <h2 id="doodles-title">Add doodles</h2>
+              <p>Choose hand-drawn marks in Wasabi, Orange Topaze, Cool Blue, Cassis, and Vert Sauge.</p>
+              <div class="palette-swatches" aria-label="Doodle color palette">
+                <span class="swatch wasabi">Wasabi</span>
+                <span class="swatch orange-topaze">Orange Topaze</span>
+                <span class="swatch cool-blue">Cool Blue</span>
+                <span class="swatch cassis">Cassis</span>
+                <span class="swatch vert-sauge">Vert Sauge</span>
+              </div>
+            </div>
+            <div class="doodle-options" aria-label="Doodle options">
+              <button class="doodle-option" type="button" data-doodle="sparkles" aria-pressed="false">✦ Sparkles</button>
+              <button class="doodle-option" type="button" data-doodle="hearts" aria-pressed="false">♡ Hearts</button>
+              <button class="doodle-option" type="button" data-doodle="stars" aria-pressed="false">★ Stars</button>
+              <button class="doodle-option" type="button" data-doodle="lightning" aria-pressed="false">↯ Lightning</button>
+              <button class="doodle-option" type="button" data-doodle="smile" aria-pressed="false">☺ Smile</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="strip-card" aria-labelledby="strip-title">
+          <div class="strip-header">
+            <p class="eyebrow">Souvenir strip</p>
+            <h2 id="strip-title">Tonight's shots</h2>
+          </div>
+          <canvas id="strip-canvas" width="900" height="2550" aria-label="Generated photobooth strip"></canvas>
+          <div class="strip-actions">
+            <button class="button primary" id="download-strip" type="button" disabled>Download strip</button>
+            <button class="button ghost" id="clear-strip" type="button" disabled>Clear</button>
+          </div>
+          <p class="hint" id="status" aria-live="polite">
+            Your strip will appear here after four photos.
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
